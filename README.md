@@ -24,6 +24,4 @@ btrfs subvolume create                                        /media/auto-backup
 
 umount /media/auto-backup-disk-mounted
 
-mount -t btrfs -o subvol=root   /dev/disk/by-label/auto-backup-disk-filesystem /media/auto-backup-disk-mounted-subvolume-root
-mount -t btrfs -o subvol=home   /dev/disk/by-label/auto-backup-disk-filesystem /media/auto-backup-disk-mounted-subvolume-home
-mount -t btrfs -o subvol=photos /dev/disk/by-label/auto-backup-disk-filesystem /media/auto-backup-disk-mounted-subvolume-photos
+cryptsetup luksClose auto-backup-disk-opened
