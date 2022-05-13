@@ -1,3 +1,20 @@
+# Shitty disk backup
+
+...because a shitty backup is better than no backup.
+
+
+## Mountpoint setup
+
+```
+mkdir /media/auto-backup-disk-mounted
+mkdir /media/auto-backup-disk-mounted-subvolume-root
+mkdir /media/auto-backup-disk-mounted-subvolume-home
+mkdir /media/auto-backup-disk-mounted-subvolume-photos
+```
+
+## Disk setup
+
+```
 parted -s /dev/sdxxx  \
     mklabel gpt \
     unit mib mkpart auto-backup-disk 1 100% \
@@ -9,13 +26,6 @@ cryptsetup luksOpen  /dev/disk/by-partlabel/auto-backup-disk auto-backup-disk-op
 
 mkfs -t btrfs  --label auto-backup-disk-filesystem /dev/mapper/auto-backup-disk-opened
 
-
-
-mkdir /media/auto-backup-disk-mounted
-mkdir /media/auto-backup-disk-mounted-subvolume-root
-mkdir /media/auto-backup-disk-mounted-subvolume-home
-mkdir /media/auto-backup-disk-mounted-subvolume-photos
-
 mount -t btrfs /dev/disk/by-label/auto-backup-disk-filesystem /media/auto-backup-disk-mounted
 
 btrfs subvolume create                                        /media/auto-backup-disk-mounted/root
@@ -25,3 +35,4 @@ btrfs subvolume create                                        /media/auto-backup
 umount /media/auto-backup-disk-mounted
 
 cryptsetup luksClose auto-backup-disk-opened
+```
