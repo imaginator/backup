@@ -24,3 +24,6 @@ mount -t btrfs -o subvol=photos /dev/disk/by-label/auto-backup-disk-filesystem /
 umount /media/auto-backup-disk-mounted-subvolume-photos
 
 cryptsetup luksClose  auto-backup-disk-opened
+
+# spindown after 5 mins
+sdparm --flexible -6 -l --save --set SCT=6000,STANDBY=1 /dev/disk/by-partlabel/auto-backup-disk
