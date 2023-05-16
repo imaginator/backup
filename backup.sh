@@ -34,5 +34,5 @@ umount /media/auto-backup-disk-mounted-subvolume-photos
 
 cryptsetup luksClose  auto-backup-disk-opened
 
-# spindown after 5 mins
-sdparm --flexible -6 -l --save --set SCT=6000,STANDBY=1 /dev/disk/by-partlabel/auto-backup-disk
+# spindown
+udisksctl power-off -b /dev/disk/by-partlabel/auto-backup-disk
